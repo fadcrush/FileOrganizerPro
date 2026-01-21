@@ -1,0 +1,70 @@
+# .dockerignore - Exclude files from Docker image build
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.pytest_cache/
+.coverage
+.tox/
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Data (will be mounted as volumes)
+data/logs/
+data/backups/
+data/cache/
+data/reports/
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Documentation
+docs/
+README.md
+
+# Development
+scripts/
+tests/
+
+# Miscellaneous
+*.bak
+*.tmp
+node_modules/
+web-dashboard/node_modules/

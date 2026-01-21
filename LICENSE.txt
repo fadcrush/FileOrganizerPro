@@ -1,0 +1,19 @@
+FileOrganizer Pro 2.0 - License
+
+Copyright (c) 2024-2025 Jedburge South Management Solutions LLC (JSMS)
+All Rights Reserved.
+
+This software is proprietary and confidential.
+
+Unauthorized copying, distribution, modification, or use of this software,
+via any medium, is strictly prohibited without the express written permission
+of JSMS Academy.
+
+For licensing inquiries, please contact:
+licensing@jsmsacademy.com
+
+JSMS Academy Mission:
+Building revenue-generating software products to fund free and low-cost
+STEM and technology training for underserved communities.
+
+Generated: 2026-01-19 02:17:17

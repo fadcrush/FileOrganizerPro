@@ -1,0 +1,171 @@
+FileOrganizer Pro 2.0 - Complete Project Structure
+======================================================================
+
+Generated: 2026-01-19 02:17:17
+Location: E:\FileOrganizerPro2
+
+======================================================================
+
+Project Tree:
+
+├── FileOrganizerPro2/
+│   ├── .gitignore
+│   ├── CHANGELOG.md
+│   ├── LICENSE.txt
+│   ├── PROJECT_STRUCTURE.txt
+│   ├── README.md
+│   ├── install.bat
+│   ├── launch.bat
+│   ├── requirements-dev.txt
+│   ├── requirements.txt
+│   ├── setup.py
+│   ├── assets/
+│   │   ├── icons/
+│   │   │   ├── README.md
+│   │   │   ├── app_icon.ico
+│   │   │   ├── categories/
+│   │   │   │   ├── archive.ico
+│   │   │   │   ├── audio.ico
+│   │   │   │   ├── camera.ico
+│   │   │   │   ├── code.ico
+│   │   │   │   ├── document.ico
+│   │   │   │   ├── duplicate.ico
+│   │   │   │   ├── executable.ico
+│   │   │   │   ├── font.ico
+│   │   │   │   ├── misc.ico
+│   │   │   │   ├── presentation.ico
+│   │   │   │   ├── spreadsheet.ico
+│   │   │   │   ├── video.ico
+│   │   ├── images/
+│   │   ├── themes/
+│   │   │   ├── dark_theme.json
+│   │   │   ├── light_theme.json
+│   ├── build/
+│   ├── config/
+│   │   ├── category_mappings.json
+│   │   ├── default_config.json
+│   │   ├── icon_mappings.json
+│   │   ├── templates/
+│   │   │   ├── business_profile.json
+│   │   │   ├── developer_profile.json
+│   │   │   ├── photographer_profile.json
+│   ├── data/
+│   │   ├── backups/
+│   │   │   ├── .gitkeep
+│   │   ├── cache/
+│   │   │   ├── .gitkeep
+│   │   ├── logs/
+│   │   │   ├── .gitkeep
+│   │   ├── reports/
+│   │   │   ├── .gitkeep
+│   ├── dist/
+│   ├── docs/
+│   │   ├── api_reference.md
+│   │   ├── contributing.md
+│   │   ├── getting_started.md
+│   │   ├── index.md
+│   │   ├── user_guide.md
+│   │   ├── images/
+│   │   ├── tutorials/
+│   │   │   ├── 01_installation.md
+│   │   │   ├── 02_first_organization.md
+│   │   │   ├── 03_duplicate_management.md
+│   │   │   ├── 04_custom_categories.md
+│   ├── examples/
+│   │   ├── api_usage.py
+│   │   ├── basic_usage.py
+│   │   ├── batch_organization.py
+│   │   ├── custom_categories.py
+│   ├── resources/
+│   │   ├── localization/
+│   │   │   ├── en_US.json
+│   │   │   ├── es_ES.json
+│   │   ├── templates/
+│   │   │   ├── report_template.html
+│   │   │   ├── summary_template.txt
+│   ├── scripts/
+│   │   ├── build_installer.py
+│   │   ├── deploy.py
+│   │   ├── generate_icons.py
+│   │   ├── run_tests.py
+│   ├── src/
+│   │   ├── __init__.py
+│   │   ├── config_manager.py
+│   │   ├── duplicate_detector.py
+│   │   ├── file_categorizer.py
+│   │   ├── file_organizer_pro.py
+│   │   ├── icon_manager.py
+│   │   ├── report_generator.py
+│   │   ├── core/
+│   │   │   ├── __init__.py
+│   │   │   ├── backup_manager.py
+│   │   │   ├── logger.py
+│   │   │   ├── organizer.py
+│   │   │   ├── processor.py
+│   │   │   ├── scanner.py
+│   │   ├── gui/
+│   │   │   ├── __init__.py
+│   │   │   ├── about_dialog.py
+│   │   │   ├── main_window.py
+│   │   │   ├── progress_window.py
+│   │   │   ├── reports_viewer.py
+│   │   │   ├── settings_dialog.py
+│   │   ├── utils/
+│   │   │   ├── __init__.py
+│   │   │   ├── date_utils.py
+│   │   │   ├── file_utils.py
+│   │   │   ├── hash_utils.py
+│   │   │   ├── path_utils.py
+│   │   │   ├── size_utils.py
+│   ├── tests/
+│   │   ├── __init__.py
+│   │   ├── conftest.py
+│   │   ├── test_config_manager.py
+│   │   ├── test_duplicate_detector.py
+│   │   ├── test_file_categorizer.py
+│   │   ├── test_icon_manager.py
+│   │   ├── test_organizer.py
+│   │   ├── fixtures/
+│   │   │   ├── sample_files.py
+│   │   ├── integration/
+│   │   │   ├── __init__.py
+│   │   │   ├── test_duplicate_workflow.py
+│   │   │   ├── test_full_organization.py
+│   │   ├── unit/
+│   │   │   ├── __init__.py
+│   │   │   ├── test_core.py
+│   │   │   ├── test_utils.py
+│   ├── tools/
+│   │   ├── category_editor.py
+│   │   ├── drive_analyzer.py
+│   │   ├── duplicate_finder.py
+
+======================================================================
+
+Folder Descriptions:
+
+assets/                        - Icons, images, and themes
+assets/icons/categories/       - Category folder icons
+build/                         - Build artifacts
+config/                        - Configuration files
+config/templates/              - Preset configuration templates
+data/                          - Runtime data
+data/backups/                  - Backup storage
+data/cache/                    - Temporary cache
+data/logs/                     - Application logs
+data/reports/                  - Generated reports
+dist/                          - Distribution packages
+docs/                          - Project documentation
+examples/                      - Usage examples
+resources/                     - Templates and resources
+resources/localization/        - Language files
+resources/templates/           - Report templates
+scripts/                       - Build and utility scripts
+src/                           - Main source code
+src/core/                      - Core organization logic
+src/gui/                       - GUI components and windows
+src/utils/                     - Utility functions and helpers
+tests/                         - Test suite
+tests/integration/             - Integration tests
+tests/unit/                    - Unit tests
+tools/                         - Development tools

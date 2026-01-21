@@ -1,0 +1,138 @@
+version: '3.8'
+
+# FileOrganizer Pro SaaS - Docker Compose
+# Runs PostgreSQL, Redis, and FastAPI application
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: fileorganizer-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: file_organizer
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fileorganizer
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: fileorganizer-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fileorganizer
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # FastAPI Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fileorganizer-app
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-postgres}@postgres:5432/file_organizer
+      REDIS_URL: redis://redis:6379/0
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-secret-key-change-in-production}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./data/logs:/app/data/logs
+      - ./data/backups:/app/data/backups
+      - ./data/reports:/app/data/reports
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - fileorganizer
+    restart: unless-stopped
+    # Uncomment for development with hot reload:
+    # command: python -m uvicorn src.backend.api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Celery Worker (optional)
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fileorganizer-celery
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-postgres}@postgres:5432/file_organizer
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./data/logs:/app/data/logs
+    networks:
+      - fileorganizer
+    restart: unless-stopped
+    command: celery -A src.backend.worker.celery_app worker --loglevel=info
+    profiles:
+      - worker
+
+  # Celery Beat (optional)
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fileorganizer-celery-beat
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-postgres}@postgres:5432/file_organizer
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./data/logs:/app/data/logs
+    networks:
+      - fileorganizer
+    restart: unless-stopped
+    command: celery -A src.backend.worker.celery_app beat --loglevel=info
+    profiles:
+      - worker
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  fileorganizer:
+    driver: bridge

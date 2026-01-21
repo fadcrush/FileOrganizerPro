@@ -1,0 +1,7 @@
+# Core dependencies
+Pillow>=9.0.0
+
+# Future dependencies (commented out)
+# Flask>=2.0.0  # For web interface
+# opencv-python>=4.5.0  # For advanced image processing
+# PyPDF2>=2.0.0  # For PDF preview

@@ -1,0 +1,14 @@
+# FileOrganizer Pro 3.1 - Phase 1 Feature Dependencies
+# Install with: pip install -r requirements-phase1.txt
+
+# Drag & Drop support
+tkinterdnd2>=0.3.0
+
+# File previews (thumbnails)
+Pillow>=10.0.0
+
+# Excel export
+openpyxl>=3.1.0
+
+# Optional: Image similarity (for existing advanced features)
+imagehash>=4.3.0
